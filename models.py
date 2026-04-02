@@ -4,7 +4,7 @@ from datetime import datetime
 
 class JobOffer(BaseModel):
     """Le schéma strict que chaque offre d'emploi doit respecter."""
-    title: str = Field(..., min_length=2)
+    title: str = Field(..., min_length=2) # l'ellipse "..." indique que ce champ est obligatoire, sans valeur par défaut, et min_length=2 
     company: str
     location: str
     salary_range: Optional[str] = "Non spécifié"

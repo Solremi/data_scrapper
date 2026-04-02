@@ -10,8 +10,8 @@ def fetch_page_content(url: str) -> str:
     try:
         print(f"🌐 Appel (léger) vers : {url}...")
         # On fait une requête HTTP classique
-        response = httpx.get(url, headers=headers, follow_redirects=True)
-        response.raise_for_status()
+        response = httpx.get(url, headers=headers, follow_redirects=True) #permet de suivre les redirections et d'arriver à la page finale
+        response.raise_for_status() # Vérifie que la requête a réussi (code 200) sinon go except 
         
         # On utilise BeautifulSoup pour extraire uniquement le texte
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -20,7 +20,7 @@ def fetch_page_content(url: str) -> str:
         for script_or_style in soup(["script", "style"]):
             script_or_style.decompose()
             
-        return soup.get_text(separator=' ', strip=True)
+        return soup.get_text(separator=' ', strip=True) # On récupère le texte brut, en séparant les éléments par des espaces et en supprimant les espaces superflus
         
     except Exception as e:
         print(f"❌ Erreur de récupération : {e}")
